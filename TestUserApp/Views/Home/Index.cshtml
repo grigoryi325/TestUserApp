@@ -1,0 +1,85 @@
+﻿@using TestUserApp.Models
+@model IEnumerable<Employee>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+</head>
+<body>
+    <script>
+    $(function () {
+        //при загрузці сторінки вікно попередження про видалення приховано
+        $('#window').hide();
+        //обробник подій для кнопок видалення записів
+        $('.del').click(function (event) {
+            //вираховуємо розміщення повідомлення
+            var pos = $(this).offset();
+            var elem_top = pos.top + 70;
+            var result_position = elem_top + "px";
+
+            var width_window = $('body').width();
+            var margin = (width_window / 2)-100;
+            var margin_left = margin + "px";
+
+            $('#window').css({ 'top': result_position, 'left': margin_left }).slideDown(500);
+
+            //взнаєм id канала по якому натиснули
+            var id = event.target.id;
+            //обробник події для кнопки підтвердження видалення
+            $('#ok').click(function () {
+                //формуємо get запит для видалення запису
+                var url = "/Home/Delete/" + id;
+                //відправляємо запит і перезагружаємо сторінку
+                location.href = url;
+            });
+            //кнопка закриття вікна 
+            $('#no').click(function () {
+                $('#window').slideUp(500);
+            });
+        });
+    });
+    </script>
+
+    <div id="window">
+        <input type="button" class="btn btn-danger" id="no" value="X">
+        <font color="red"><h4 align="center">Ви впевнені що хочете видалити цей запис?</h4></font>
+        <br>
+        <input type="button" class="btn btn-default" id="ok" value="видалити">
+    </div>
+    <div style="margin:30px 0 0 5%;"><a href="~/Home/Create/">Добавити</a></p></div><hr>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ім'я</th>
+                    <th scope="col">Позиція</th>
+                    <th scope="col">Вік</th>
+                    <th scope="col">Опції</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Employee b in Model)
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>@b.Name</td>
+                        <td>@b.Position</td>
+                        <td>@b.YearDate р.</td>
+                        <td><i class="del" id="@b.Id">Видалити</i> | <a href="~/Home/Edit/@b.Id">Редагувати</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

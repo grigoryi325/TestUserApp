@@ -1,0 +1,65 @@
+﻿.message {
+    color: red;
+}
+
+#window {
+    width: 400px;
+    height: 144px;
+    border: 2px solid grey;
+    background-color: white;
+    position: absolute;
+    top: -1000px;
+    left: 43%;
+    margin: -125px 0 0 -125px;
+}
+
+#ok {
+    border: 1px solid grey;
+    cursor: pointer;
+    width: 85px;
+    margin-left: 160px;
+}
+
+#no {
+    margin: 3px 3px 3px 358px;
+}
+
+.idtest {
+    visibility: hidden;
+}
+
+.content {
+    width: 1000px;
+    margin: auto 15%;
+}
+
+#result {
+    cursor: pointer;
+    background-color: #e5e5e5;
+    border-radius: 5px;
+    color: black;
+    padding: 5px 9px;
+    width: 60px;
+    height: 30px;
+}
+
+#result:hover {
+    background-color: #bdbdbd;
+}
+
+
+i.del, a.del:visited {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    padding: 3px 5px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+i.del:hover, a.del:active {
+    cursor: pointer;
+    background-color: darkred;
+    color: white;
+}
+
